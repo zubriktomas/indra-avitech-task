@@ -1,0 +1,4 @@
+Napiste program v jazyku Java, ktory nacita vstupny CSV subor.
+(format je prvy stlpec kluc, ostatne stlpce hodnoty).
+Program dostane parameter kluc a vypise najmensiu a najvacsiu hodnotu v riadku urcenu klucom.
+
