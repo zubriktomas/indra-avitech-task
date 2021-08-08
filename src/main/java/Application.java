@@ -1,8 +1,5 @@
-import com.opencsv.CSVParser;
-import com.opencsv.CSVParserBuilder;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.*;
 
@@ -19,22 +16,20 @@ public class Application {
             String keyGiven = args.length == 2 ? args[1] : "";
 
             try {
-                // Create an object of filereader class with CSV file as a parameter.
-                FileReader filereader = new FileReader(filename);
+                List<String[]> allData = new ArrayList<>();
+                BufferedReader br = new BufferedReader(new FileReader(filename));
+                String line;
 
-                // Create CSV parser
-                CSVParser parser = new CSVParserBuilder().withSeparator(';').build();
-
-                // Create csvReader object with parameters filereader and parser
-                CSVReader csvReader = new CSVReaderBuilder(filereader).withCSVParser(parser).build();
-
-                // Read all data at once
-                List<String[]> allData = csvReader.readAll();
+                // Parse all lines
+                while ((line = br.readLine()) != null) {
+                    String[] values = line.split(";");
+                    allData.add(values);
+                }
 
                 // Init values
                 Integer value, min, max;
                 List<Integer> minMax;
-                Map<String, List<Integer>> entries = new HashMap<>();
+                Map<String, List<Integer>> entries = new HashMap<>(); // Hashmap for interactive lookup
                 Boolean found = false;
 
                 // Print by given key
